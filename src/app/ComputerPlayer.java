@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class ComputerPlayer extends Player{
     
-    private final ArrayList<Integer> losses;
+    private final ArrayList<String> losses;
     
     
     public ComputerPlayer(Letter letter){

@@ -10,7 +10,7 @@ package app;
  * @author alex
  */
 public enum Letter {
-    X(-1,"x"),O(1,"o");
+    X(0,"x"),O(1,"o");
     
     private final int value;
     private final String letter;

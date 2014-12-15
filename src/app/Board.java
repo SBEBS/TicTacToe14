@@ -16,11 +16,11 @@ public class Board {
         this.grid = new Letter[9];
     }
     
-    public int getFlattened()
+    public String getFlattened()
     {
-        int result = 0;
-        for(int i = 0; i < this.grid.length; i++){
-            result += Math.pow(2,i)*grid[i].value();
+        String result = "";
+        for(Letter letter: grid){
+            result += letter.value();
         }
         return result;
     }
