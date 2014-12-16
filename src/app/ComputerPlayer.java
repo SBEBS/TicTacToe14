@@ -11,21 +11,25 @@ import java.util.ArrayList;
  *
  * @author alex
  */
-public class ComputerPlayer extends Player{
+public class ComputerPlayer extends Player
+{
     
-    private final ArrayList<Integer> losses;
+    private final ArrayList<String> losses;
     
     
-    public ComputerPlayer(Letter letter){
+    public ComputerPlayer(Letter letter)
+    {
         super(letter, "Computer");
         this.losses = new ArrayList<>();
     }
     
-    public void lose(Board lossState){
-        this.losses.add(lossState.getFlattened());
+    public void lose(Board lossState)
+    {
+        this.losses.add(lossState.flattened());
     }
     
-    public boolean checkLosses(Board move){
-        return this.losses.contains(move.getFlattened());
+    public boolean checkLosses(Board move)
+    {
+        return this.losses.contains(move.flattened());
     }
 }

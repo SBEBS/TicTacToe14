@@ -7,60 +7,62 @@ package app;
 
 /**
  *
- * @author alex
+ * @author dtallen97
  */
-public class Board {
+public class Board 
+{
     private Letter[] grid;
     
-    public Board(){
+    public Board()
+    {
         this.grid = new Letter[9];
+        for(Letter letter: grid)
+            letter = Letter.E;
     }
     
-    public int getFlattened()
+    @Override
+    public String toString()
     {
-        int result = 0;
-        for(int i = 0; i < this.grid.length; i++){
-            result += Math.pow(2,i)*grid[i].value();
+        String gridString = "";
+        
+        for(int i = 0; i < grid.length; i++)
+        {
+            if(i % 3 == 0)
+                gridString += "\n";
+            gridString += grid[i];
         }
+        
+        return gridString;
+    }
+    
+    public String flattened()
+    {
+        String result = "";
+        
+        for(Letter letter: grid)
+            result += letter.value();
+        
         return result;
     }
     
-    public boolean isLegalMove(int row, int col){
-        if((row <= 3 && row > 0) && (col <= 3 && col > 0))
-            return (this.grid[((row-1)*3 + (col-1))]==null);
-        else return false;
+    private boolean isLegalMove(int pos)
+    {
+        if(pos >= 0 && pos <= 8)
+            return (this.grid[pos] == null);
+        else 
+            return false;
     }
     
-    /*
-    Rows start from the top and columns start from the left.  The numbers are 1-based
-    meaning 1,2,3 instead of 0,1,2
-    */
-    public void recordMove(Letter current, int row, int col){
-        int index = (row-1)*3 + (col-1);
-        if(!this.isLegalMove(row,col)){
-            this.grid[index] = current;
-        }
+    public void recordMove(Letter current, int pos) throws IllegalArgumentException
+    {
+        if(this.isLegalMove(pos))
+            this.grid[pos] = current;
+        else 
+            throw new IllegalArgumentException("Position not legal.");
     }
     
-    
-    
-    public Letter[] getRow(int row){
-        Letter[] res = new Letter[3];
-        for(int i = 0; i < res.length; i++){
-            res[i] = grid[i+(row-1)*3];
-        }
-        return res;
-    }
-    
-    public Letter[] getCol(int col){
-        Letter[] res = new Letter[3];
-        for(int i = 0; i < res.length; i++){
-            res[i] = grid[i*(col-1)];
-        }
-        return res;
-    }
-    
-    public Letter get(int row, int col){
-       return this.grid[(row-1)*3 + (col-1)];
+    public void updateBoard(Letter[] newBoard)
+    {
+        this.grid = newBoard;
     }
 }
