@@ -14,7 +14,7 @@ public enum Letter
     E(-1, "-"), 
     X(0, "x"), 
     O(1, "o");
-    
+
     private final int value;
     private final String letter;
     
