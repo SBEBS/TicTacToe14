@@ -9,7 +9,7 @@ package app;
  *
  * @author alex
  */
-public class Player 
+public class Player
 {
     private int score;
     private final Letter letter;
@@ -27,9 +27,19 @@ public class Player
         this.score += 1;
     }
     
+    public Letter getLetter()
+    {
+        return this.letter;
+    }
+    
     public int getScore()
     {
         return this.score;
+    }
+    
+    public int play()
+    {
+        return 0;
     }
 }
  

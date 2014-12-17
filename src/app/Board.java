@@ -61,8 +61,4 @@ public class Board
             throw new IllegalArgumentException("Position not legal.");
     }
     
-    public void updateBoard(Letter[] newBoard)
-    {
-        this.grid = newBoard;
-    }
 }

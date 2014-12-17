@@ -12,20 +12,20 @@ import java.util.ArrayList;
  * @author alex
  */
 public class ComputerPlayer extends Player
-{
-    
+{  
     private final ArrayList<String> losses;
-    
+    private Board lastMove;
     
     public ComputerPlayer(Letter letter)
     {
         super(letter, "Computer");
         this.losses = new ArrayList<>();
+        this.lastMove = new Board();
     }
     
-    public void lose(Board lossState)
+    public void lose()
     {
-        this.losses.add(lossState.flattened());
+        this.losses.add(lastMove.flattened());
     }
     
     public boolean checkLosses(Board move)

@@ -8,6 +8,8 @@
 package app.cli;
 import app.*;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author alex
@@ -16,8 +18,9 @@ public class Game
 {
     private final Player player1;
     private final Player player2;
-    private final Board gameBoard;
     private final Scanner scan;
+    private Board gameBoard;
+    private Player currentPlayer;
     
     
     public Game()
@@ -31,15 +34,52 @@ public class Game
         System.out.print("What would you like your letter to be? ");
         String letter = this.scan.next();
         
-        if(letter.equalsIgnoreCase("o")) {
+        if(letter.equalsIgnoreCase("o")) 
+        {
             this.player1 = new Player(Letter.O, name);
             this.player2 = new ComputerPlayer(Letter.X);
         }
-        else{
+        else
+        {
             this.player1 = new Player(Letter.X, name);
             this.player2 = new ComputerPlayer(Letter.O);
         }
     
+    }
+    
+    public void run()
+    {
+        boolean playing = true;
+        while (playing)
+        {
+            int play = currentPlayer.play();
+            gameBoard.recordMove(currentPlayer.getLetter(), play);
+            System.out.println(gameBoard.toString());
+            
+            try
+            {
+                nextTurn();
+            }
+            catch (InterruptedException ex) 
+            {
+                System.exit(1);
+            }
+        }
+    }
+    
+    public void nextTurn() throws InterruptedException
+    {
+        if(!(currentPlayer instanceof ComputerPlayer))
+            {
+                currentPlayer = player2;
+                System.out.println("The computer is playing...");
+                Thread.sleep(3000);
+            }
+            else
+            {
+                currentPlayer = player1;
+                System.out.println("Your turn!");
+            }
     }
     
     public void quit()
