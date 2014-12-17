@@ -9,26 +9,22 @@ package app;
  *
  * @author alex
  */
-public class Player 
-{
+public class Player {
     private int score;
     private final Letter letter;
     private final String name;
     
-    public Player(Letter letter, String name)
-    {
+    public Player(Letter letter, String name){
         this.score = 0;
         this.letter = letter;
         this.name = name;
     }
     
-    public void win()
-    {
+    public void win(){
         this.score += 1;
     }
     
-    public int getScore()
-    {
+    public int getScore(){
         return this.score;
     }
 }

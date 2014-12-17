@@ -12,16 +12,14 @@ import java.util.Scanner;
  *
  * @author alex
  */
-public class Game 
-{
+public class Game {
     private final Player player1;
     private final Player player2;
     private final Board gameBoard;
     private final Scanner scan;
     
     
-    public Game()
-    {
+    public Game(){
         this.scan = new Scanner(System.in);
         this.gameBoard = new Board();
         
@@ -40,6 +38,40 @@ public class Game
             this.player2 = new ComputerPlayer(Letter.O);
         }
     
+    }
+    
+    
+    public boolean hasWin(){
+        Letter[] row;
+        Letter[] col;
+        Letter[] diag;
+        Letter rowFirst;
+        Letter colFirst;
+        Letter diagFirst;
+        for(int i = 1; i <= 3; i++){
+            row = this.gameBoard.getRow(i);
+            col = this.gameBoard.getCol(i);
+            
+            //Check rows for three in a row
+            rowFirst = row[0];
+            for(Letter letter:row){
+                if(letter.equals(rowFirst)) return true;
+            }
+            
+            //Check columns for three in a row
+            colFirst = col[0];
+            for(Letter letter:col){
+                if(letter.equals(colFirst)) return true;
+            }               
+        }
+        //Check backslash diagonal
+            if(this.gameBoard.get(1, 1).equals(this.gameBoard.get(2,2)) && this.gameBoard.get(1, 1).equals(this.gameBoard.get(3,3))) return true;
+            
+        //Check forwardslash diagonal
+            if(this.gameBoard.get(3, 1).equals(this.gameBoard.get(2,2)) && this.gameBoard.get(3, 1).equals(this.gameBoard.get(1,3))) return true;
+            
+        return false;    
+        
     }
     
     public void quit()

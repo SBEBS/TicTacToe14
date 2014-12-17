@@ -9,27 +9,21 @@ package app;
  *
  * @author alex
  */
-public enum Letter 
-{
-    E(-1, "-"), 
-    X(0, "x"), 
-    O(1, "o");
+public enum Letter {
+    X(-1,"x"),O(1,"o");
     
     private final int value;
     private final String letter;
     
-    Letter(int value, String letter)
-    {
+    Letter(int value, String letter){
         this.value = value;
         this.letter = letter;
     }
-    public int value()
-    {
+    public int value(){
         return this.value;
     }
     
-    public String letter()
-    {
+    public String letter(){
         return this.letter;
     }
 }
