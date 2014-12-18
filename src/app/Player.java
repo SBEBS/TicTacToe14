@@ -5,13 +5,16 @@
  */
 package app;
 
+import java.util.Scanner;
+
 /**
  *
- * @author alex
+ * @author dtallen97
  */
 public class Player
 {
     private int score;
+    private final Scanner playScan;
     private final Letter letter;
     private final String name;
     
@@ -20,6 +23,7 @@ public class Player
         this.score = 0;
         this.letter = letter;
         this.name = name;
+        this.playScan = new Scanner(System.in);
     }
     
     public void win()

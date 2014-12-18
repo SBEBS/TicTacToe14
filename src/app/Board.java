@@ -47,7 +47,7 @@ public class Board
     
     private boolean isLegalMove(int pos)
     {
-        if(pos >= 0 && pos <= 8)
+        if(pos >= 0 && pos <= 8) 
             return (this.grid[pos] == null);
         else 
             return false;
@@ -61,4 +61,26 @@ public class Board
             throw new IllegalArgumentException("Position not legal.");
     }
     
+    public boolean checkWin()
+    {
+        //rows
+        for (int i = 0; i < 9; i += 3) 
+            if (grid[i] == grid[i + 1] && grid[i] == grid[i + 2]) 
+                return true;
+        
+        // columns
+        for (int i = 0; i < 3; i++) 
+            if (grid[i] == grid[i + 3] && grid[i] == grid[i + 6]) 
+                return true;
+    
+        // diagonals
+        return grid[2] == grid[4] && grid[2] == grid[6] 
+            || grid[0] == grid[4] && grid[0] == grid[8];
+    }
+    
+    public void resetBoard()
+    {
+        for(Letter letter: grid)
+            letter = Letter.E;
+    }
 }

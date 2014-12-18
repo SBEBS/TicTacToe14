@@ -6,20 +6,20 @@
 
 
 package app.cli;
+
 import app.*;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
- * @author alex
+ * @author dtallen97
  */
 public class Game 
 {
     private final Player player1;
     private final Player player2;
     private final Scanner scan;
-    private Board gameBoard;
+    private final Board gameBoard;
     private Player currentPlayer;
     
     
@@ -56,15 +56,35 @@ public class Game
             gameBoard.recordMove(currentPlayer.getLetter(), play);
             System.out.println(gameBoard.toString());
             
-            try
+            if(gameBoard.checkWin()) 
             {
-                nextTurn();
+                currentPlayer.win();
+                
+                try
+                {
+                    playing = newGame();
+                    gameBoard.resetBoard();
+                }
+                catch (IllegalArgumentException ex)
+                {
+                    System.out.println("That is not an option. Try again!");
+                    playing = newGame();
+                }
             }
-            catch (InterruptedException ex) 
+            else
             {
-                System.exit(1);
+                try
+                {
+                    nextTurn();
+                }
+                catch (InterruptedException ex) 
+                {
+                    System.out.println("Wait your turn!");
+                }
             }
         }
+        System.out.println("Thanks for playing! See you next time!");
+        quit();
     }
     
     public void nextTurn() throws InterruptedException
@@ -80,6 +100,24 @@ public class Game
                 currentPlayer = player1;
                 System.out.println("Your turn!");
             }
+    }
+    
+    public boolean newGame() throws IllegalArgumentException
+    {
+        if(this.currentPlayer.equals(this.player1))
+            System.out.println("YOU WIN!");
+        else
+            System.out.println("YOU LOSE!");
+        
+        System.out.print("Would you like to play again? (yes/no)");
+        String option = this.scan.next();
+        
+        if(option.equalsIgnoreCase("yes"))
+            return true;
+        else if(option.equalsIgnoreCase("no")) 
+            return false;
+        else
+            throw new IllegalArgumentException("Option not valid.");
     }
     
     public void quit()

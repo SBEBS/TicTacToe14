@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author alex
+ * @author dtallen97
  */
 public class ComputerPlayer extends Player
 {  
@@ -21,6 +21,12 @@ public class ComputerPlayer extends Player
         super(letter, "Computer");
         this.losses = new ArrayList<>();
         this.lastMove = new Board();
+    }
+    
+    @Override
+    public int play()
+    {
+        return 0;
     }
     
     public void lose()
